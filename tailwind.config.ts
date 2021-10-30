@@ -11,4 +11,14 @@ export default defineConfig({
       '.git/**/*',
     ],
   },
+  theme: {
+    extend: {
+      transitionProperty: {
+        width: 'width',
+        height: 'height',
+        spacing: 'margin, padding',
+        size: 'margin, padding, width, height',
+      },
+    },
+  },
 })
