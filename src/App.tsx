@@ -16,8 +16,10 @@ const App: FC = () => {
   const setTheme = () => {
     if (themeMode === ThemeMode.auto ? autoTheme.matches : themeMode === ThemeMode.dark) {
       document.documentElement.classList.add('dark')
+      document.documentElement.style.colorScheme = 'dark'
     } else {
       document.documentElement.classList.remove('dark')
+      document.documentElement.style.colorScheme = ''
     }
     localStorage.setItem(themeModeKey, themeMode.toString())
   }
