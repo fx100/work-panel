@@ -1,4 +1,5 @@
 import { createContext, FC, useEffect, useState } from 'react'
+import Apps from './pages/Apps'
 
 export enum ThemeMode { auto, light, dark }
 export const themeModeKey = 'themeMode'
@@ -31,6 +32,7 @@ const App: FC = () => {
         <div className={`box-content border-r border-r-light-500 dark:border-r-dark-500 transition-width ${collapsed ? 'w-12' : 'w-60'}`}>
           <button onClick={() => setCollapsed(!collapsed)}>切换</button>
           <br />
+          <br />
           <ThemeContext.Consumer>{(value) => {
             switch(value.themeMode) {
               case ThemeMode.auto:
@@ -41,11 +43,16 @@ const App: FC = () => {
                 return '深色'
             }
           }}</ThemeContext.Consumer>
+          <br />
+          <br />
+          <button onClick={() => setThemeMode(ThemeMode.auto)}>自动</button>
+          <br />
+          <button onClick={() => setThemeMode(ThemeMode.light)}>浅色</button>
+          <br />
+          <button onClick={() => setThemeMode(ThemeMode.dark)}>深色</button>
         </div>
         <div className="flex-1">
-          <button onClick={() => setThemeMode(ThemeMode.auto)}>自动</button>
-          <button onClick={() => setThemeMode(ThemeMode.light)}>浅色</button>
-          <button onClick={() => setThemeMode(ThemeMode.dark)}>深色</button>
+          <Apps></Apps>
         </div>
       </div>
     </ThemeContext.Provider>

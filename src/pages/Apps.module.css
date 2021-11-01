@@ -1,0 +1,35 @@
+.page {
+  user-select: none;
+}
+
+.groups {
+  @apply p-6;
+}
+
+.group {
+  @apply p-2;
+}
+
+.groupName {
+  @apply h-5 text-sm mb-2;
+}
+
+.apps {
+  @apply flex flex-wrap gap-2;
+}
+
+.app {
+  @apply w-24 h-24 flex flex-col items-center justify-center rounded bg-black bg-opacity-[0.02] dark:(bg-white bg-opacity-[0.02]);
+}
+
+.appLogo {
+  @apply mt-7 w-10 h-10 rounded;
+}
+
+.appLogoText {
+  @apply leading-none text-center flex justify-center items-center bg-green-500 bg-opacity-20;
+}
+
+.appName {
+  @apply pt-2 pb-1 px-1 text-xs max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap;
+}

@@ -3,9 +3,12 @@ lockfileVersion: 5.3
 specifiers:
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
+  '@types/sortablejs': ^1.10.7
   '@vitejs/plugin-react': ^1.0.0
   react: ^17.0.0
   react-dom: ^17.0.0
+  react-sortablejs: ^6.0.0
+  sortablejs: ^1.14.0
   typescript: ^4.3.2
   vite: ^2.6.4
   vite-plugin-windicss: ^1.4.12
@@ -14,10 +17,13 @@ specifiers:
 dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-sortablejs: 6.0.0_5225c19a6dafa75cd438f6773f26a971
+  sortablejs: 1.14.0
 
 devDependencies:
   '@types/react': 17.0.33
   '@types/react-dom': 17.0.10
+  '@types/sortablejs': 1.10.7
   '@vitejs/plugin-react': 1.0.7
   typescript: 4.4.4
   vite: 2.6.13
@@ -362,6 +368,10 @@ packages:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
 
+  /@types/sortablejs/1.10.7:
+    resolution: {integrity: sha512-lGCwwgpj8zW/ZmaueoPVSP7nnc9t8VqVWXS+ASX3eoUUENmiazv0rlXyTRludXzuX9ALjPsMqBu85TgJNWbTOg==}
+    dev: true
+
   /@types/throttle-debounce/2.1.0:
     resolution: {integrity: sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==}
     dev: true
@@ -459,6 +469,10 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -887,6 +901,22 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /react-sortablejs/6.0.0_5225c19a6dafa75cd438f6773f26a971:
+    resolution: {integrity: sha512-vzi+TWOnofcYg+dYnC/Iz/ZZkBGG76uM6KaLwuAqBk0349JQxIy3PZizbK0TJdLlK6NnLt4CiEyyQXSSnVYvEw==}
+    peerDependencies:
+      '@types/sortablejs': ^1.10.0
+      react: ^16.9.0
+      react-dom: ^16.9.0
+      sortablejs: ^1.10.0
+    dependencies:
+      '@types/sortablejs': 1.10.7
+      classnames: 2.3.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sortablejs: 1.14.0
+      tiny-invariant: 1.1.0
+    dev: false
+
   /react/17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
     engines: {node: '>=0.10.0'}
@@ -937,6 +967,10 @@ packages:
     hasBin: true
     dev: true
 
+  /sortablejs/1.14.0:
+    resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
+    dev: false
+
   /source-map-js/0.6.2:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
     engines: {node: '>=0.10.0'}
@@ -964,6 +998,10 @@ packages:
     dependencies:
       has-flag: 4.0.0
     dev: true
+
+  /tiny-invariant/1.1.0:
+    resolution: {integrity: sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
