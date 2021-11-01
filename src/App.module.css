@@ -1,0 +1,19 @@
+.app {
+  @apply h-screen flex overflow-hidden duration-150;
+  @apply bg-white text-black text-opacity-85 transition-colors;
+  @apply dark:(bg-dark-900 text-white text-opacity-85);
+  transition-property: background-color;
+}
+
+.sider {
+  @apply w-60 box-content border-r overflow-hidden;
+  @apply transition-all border-r-light-500 dark:border-r-dark-500;
+}
+
+.siderCollapsed {
+  @apply w-12;
+}
+
+.content {
+  @apply flex-1 overflow-y-auto;
+}

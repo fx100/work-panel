@@ -1,5 +1,6 @@
 import { createContext, FC, useEffect, useState } from 'react'
 import Apps from './pages/Apps'
+import css from './App.module.css'
 
 export enum ThemeMode { auto, light, dark }
 export const themeModeKey = 'themeMode'
@@ -30,8 +31,8 @@ const App: FC = () => {
 
   return (
     <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
-      <div className="h-screen bg-white dark:bg-dark-900 text-black dark:text-white text-opacity-85 dark:text-opacity-85 flex">
-        <div className={`box-content border-r border-r-light-500 dark:border-r-dark-500 transition-width ${collapsed ? 'w-12' : 'w-60'}`}>
+      <div className={css.app}>
+        <div className={`${css.sider} ${collapsed ? css.siderCollapsed : ''}`}>
           <button onClick={() => setCollapsed(!collapsed)}>切换</button>
           <br />
           <br />
@@ -53,7 +54,7 @@ const App: FC = () => {
           <br />
           <button onClick={() => setThemeMode(ThemeMode.dark)}>深色</button>
         </div>
-        <div className="flex-1">
+        <div className={css.content}>
           <Apps></Apps>
         </div>
       </div>
