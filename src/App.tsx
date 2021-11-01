@@ -1,4 +1,5 @@
-import { createContext, FC, useEffect, useState } from 'react'
+import { createContext, FC, useEffect, useState, useRef } from 'react'
+import useSize from '@react-hook/size'
 import Apps from './pages/Apps'
 import css from './App.module.css'
 
@@ -12,7 +13,13 @@ const themeModeDefault = {
 export const ThemeContext = createContext(themeModeDefault)
 const autoTheme = matchMedia('(prefers-color-scheme: dark)')
 
+enum SiderCollapsed { false = '0', true = '1' }
+const siderCollapsedKey = 'siderCollapsed'
+const siderCollapsedBreakpoint = 640
+
 const App: FC = () => {
+  const appRef = useRef(null)
+
   const [themeMode, setThemeMode] = useState(themeModeLocal ? parseInt(themeModeLocal) : themeModeDefault.themeMode)
   const setTheme = () => {
     if (themeMode === ThemeMode.auto ? autoTheme.matches : themeMode === ThemeMode.dark) {
@@ -27,11 +34,33 @@ const App: FC = () => {
   autoTheme.addEventListener('change', setTheme)
   useEffect(setTheme)
 
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(localStorage.getItem(siderCollapsedKey) === SiderCollapsed.true)
+  useEffect(() => {
+    localStorage.setItem(siderCollapsedKey, collapsed ? SiderCollapsed.true : SiderCollapsed.false)
+  })
+  const appSize = useSize(appRef)
+  const [lastAppSize, setLastAppSize] = useState([0, 0])
+  useEffect(() => {
+    const lastAppWidth = lastAppSize[0]
+    const appWidth = appSize[0]
+    if (lastAppWidth === 0) {
+      setLastAppSize(appSize)
+    } else if (appWidth < siderCollapsedBreakpoint) {
+      if (lastAppWidth >= siderCollapsedBreakpoint) {
+        setLastAppSize(appSize)
+        setCollapsed(true)
+      }
+    } else {
+      if (lastAppWidth < siderCollapsedBreakpoint) {
+        setLastAppSize(appSize)
+        setCollapsed(false)
+      }
+    }
+  }, [appSize[0]])
 
   return (
     <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
-      <div className={css.app}>
+      <div className={css.app} ref={appRef}>
         <div className={`${css.sider} ${collapsed ? css.siderCollapsed : ''}`}>
           <button onClick={() => setCollapsed(!collapsed)}>切换</button>
           <br />
