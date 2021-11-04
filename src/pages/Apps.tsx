@@ -11,18 +11,6 @@ interface App {
   apps?: App[]
 }
 
-// 拖拽时显示空白图片
-const dragImg = new Image()
-dragImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAQUA+v8AAAAAAAAFAAFkeJU4AAAAAElFTkSuQmCC'
-dragImg.style.position = 'absolute'
-dragImg.style.zIndex = '-10000'
-dragImg.style.left = '0'
-dragImg.style.top = '0'
-document.body.appendChild(dragImg)
-const setDragImage = (dataTransfer: DataTransfer) => {
-  dataTransfer.setDragImage(dragImg, 0, 0)
-}
-
 // 拖拽动画时长 单位：毫秒
 const dragAnimation = 150
 
@@ -148,28 +136,40 @@ const Apps: FC = () => {
 
   return (
     <div className={css.page}>
+      <div className={css.header}>
+        <div className={css.control}>
+          全部应用
+          <svg className={css.controlIcon} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z"></path>
+          </svg>
+        </div>
+      </div>
       <ReactSortable
         className={css.groups}
+        ghostClass={css.ghost}
         group="groups"
         list={apps}
         setList={setApps}
         animation={dragAnimation}
-        setData={setDragImage}
       >
         {apps.map((item, index) => (
           <div className={css.group} key={item.id}>
             <div className={css.groupName}>{item.name}</div>
             <ReactSortable
               className={css.apps}
+              ghostClass={css.ghost}
               group="apps"
               list={item.apps}
               setList={(apps) => setSubApps(index, apps)}
               animation={dragAnimation}
-              setData={setDragImage}
             >
               {item.apps?.map((item) => (
                 <div className={css.app} key={item.id}>
-                  {item?.icon ? <img className={css.appLogo} src={item.icon} /> : <div className={`${css.appLogo} ${css.appLogoText}`}>{item.name.slice(0, 2)}</div>}
+                  {item?.icon ? (
+                    <img className={css.appLogo} src={item.icon} />
+                  ) : (
+                    <div className={`${css.appLogo} ${css.appLogoText}`}>{item.name.slice(0, 1)}</div>
+                  )}
                   <div className={css.appName}>{item.name}</div>
                 </div>
               ))}
@@ -180,4 +180,5 @@ const Apps: FC = () => {
     </div>
   )
 }
+
 export default Apps

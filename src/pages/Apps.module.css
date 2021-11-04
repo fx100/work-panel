@@ -1,35 +1,53 @@
 .page {
   user-select: none;
+  @apply p-8;
 }
 
-.groups {
-  @apply p-6;
+.header {
+  @apply flex justify-end items-center;
+}
+.header > .control {
+  @apply text-xs px-[7px] py-[3px] border rounded flex gap-2 transition-colors;
+  @apply border-black border-opacity-10 bg-black bg-opacity-5;
+  @apply dark:(border-white border-opacity-10 bg-white bg-opacity-5);
+  @apply hover:bg-opacity-10 active:bg-opacity-5;
+}
+.header > .control > .controlIcon {
+  @apply w-4 h-4 fill-current;
 }
 
-.group {
-  @apply p-2;
+.ghost {
+  @apply opacity-0;
 }
 
-.groupName {
-  @apply h-5 text-sm mb-2;
+.groups {}
+.groups > .group {
+  @apply mt-[34px];
+}
+.groups > .group > .groupName {
+  @apply px-8 text-sm leading-[18px] font-semibold;
 }
 
 .apps {
-  @apply flex flex-wrap gap-2;
+  @apply pt-4 flex flex-wrap;
 }
-
-.app {
-  @apply w-24 h-24 flex flex-col items-center justify-center rounded bg-black bg-opacity-[0.02] dark:(bg-white bg-opacity-[0.02]);
+.apps > .app {
+  @apply w-24 h-[5.25rem] rounded-md transition-colors;
+  @apply hover:(bg-black bg-opacity-[0.06] dark:(bg-white bg-opacity-[0.06]));
+  @apply active:!bg-opacity-[0.04];
 }
-
-.appLogo {
-  @apply mt-7 w-10 h-10 rounded;
+.apps > .app > .appLogo {
+  @apply mt-3 mx-auto w-8 h-8 transform transition-transform;
 }
-
-.appLogoText {
-  @apply leading-none text-center flex justify-center items-center bg-green-500 bg-opacity-20;
+.apps > .app:active > .appLogo {
+  @apply scale-75;
 }
-
-.appName {
-  @apply pt-2 pb-1 px-1 text-xs max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap;
+.apps > .app > .appLogo.appLogoText {
+  @apply text-base text-center leading-8 bg-green-500 text-white;
+}
+.apps > .app > .appName {
+  @apply m-1 h-8 text-xs text-center max-w-full overflow-hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
