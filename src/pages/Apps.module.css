@@ -38,11 +38,10 @@
   @apply opacity-0;
 }
 
-.groups {}
-.groups > .group {
+.group {
   @apply mt-[34px];
 }
-.groups > .group > .groupName {
+.group > .groupName {
   @apply px-8 text-sm leading-[18px] font-semibold;
 }
 
@@ -54,13 +53,13 @@
   @apply hover:(bg-black bg-opacity-[0.06] dark:(bg-white bg-opacity-[0.06]));
   @apply active:!bg-opacity-[0.04];
 }
-.apps > .app > .appLogo {
+.apps > .app > .appIcon {
   @apply mt-3 mx-auto w-8 h-8 transform transition-transform;
 }
-.apps > .app:active > .appLogo {
+.apps > .app:active > .appIcon {
   @apply scale-75;
 }
-.apps > .app > .appLogo.appLogoText {
+.apps > .app > .appIcon.appIconText {
   @apply text-base text-center leading-8 bg-green-500 text-white;
 }
 .apps > .app > .appName {
@@ -68,4 +67,22 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.listApps {
+  @apply p-4 pb-0;
+}
+.listApps > .app {
+  @apply px-3 py-2 flex items-center rounded-md transition-colors;
+  @apply hover:(bg-black bg-opacity-[0.06] dark:(bg-white bg-opacity-[0.06]));
+  @apply active:!bg-opacity-[0.04];
+}
+.listApps > .app > .appIcon {
+  @apply w-6 h-6 mr-5;
+}
+.listApps > .app > .appIcon.appIconText {
+  @apply text-sm text-center leading-6 bg-green-500 text-white;
+}
+.listApps > .app > .appName {
+  @apply text-xs;
 }

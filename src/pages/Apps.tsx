@@ -169,6 +169,21 @@ const Apps: FC = () => {
                   返回
                 </div>
               </div>
+              <div className={css.group}>
+                <div className={css.groupName}>全部应用</div>
+                <div className={css.listApps}>
+                  {apps.map((group) => group.apps).flat().map((item) => (
+                    item?.id && <div className={css.app} key={item.id}>
+                      {item?.icon ? (
+                        <img className={css.appIcon} src={item.icon} />
+                      ) : (
+                        <div className={`${css.appIcon} ${css.appIconText}`}>{item.name.slice(0, 1)}</div>
+                      )}
+                      <div className={css.appName}>{item.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </>
           ) : (
             <>
@@ -181,7 +196,6 @@ const Apps: FC = () => {
                 </div>
               </div>
               <ReactSortable
-                className={css.groups}
                 ghostClass={css.ghost}
                 group="groups"
                 list={apps}
@@ -202,9 +216,9 @@ const Apps: FC = () => {
                       {item.apps?.map((item) => (
                         <div className={css.app} key={item.id}>
                           {item?.icon ? (
-                            <img className={css.appLogo} src={item.icon} />
+                            <img className={css.appIcon} src={item.icon} />
                           ) : (
-                            <div className={`${css.appLogo} ${css.appLogoText}`}>{item.name.slice(0, 1)}</div>
+                            <div className={`${css.appIcon} ${css.appIconText}`}>{item.name.slice(0, 1)}</div>
                           )}
                           <div className={css.appName}>{item.name}</div>
                         </div>
