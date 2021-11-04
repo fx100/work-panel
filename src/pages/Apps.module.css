@@ -1,6 +1,24 @@
 .page {
   user-select: none;
-  @apply p-8;
+  @apply p-8 transform;
+}
+.pageShowAllEnter {
+  @apply translate-x-6 opacity-0;
+}
+.pageShowAllBackEnter {
+  @apply -translate-x-6 opacity-0;
+}
+.pageShowAllEnterActive {
+  @apply transition-all translate-x-0 opacity-100;
+}
+.pageShowAllExit {
+  @apply translate-x-0 opacity-100;
+}
+.pageShowAllExitActive {
+  @apply transition-all translate-x-6 opacity-0;
+}
+.pageShowAllBackExitActive {
+  @apply transition-all -translate-x-6 opacity-0;
 }
 
 .header {

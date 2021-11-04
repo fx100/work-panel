@@ -1,5 +1,6 @@
-import { FC, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 import { ReactSortable } from 'react-sortablejs'
+import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import css from './Apps.module.css'
 
 const icons = import.meta.globEager('../assets/*.jpg')
@@ -15,6 +16,9 @@ interface App {
 const dragAnimation = 150
 
 const Apps: FC = () => {
+  const pageRef = useRef<HTMLDivElement>(null)
+  const [showAll, setShowAll] = useState(false)
+
   const [apps, setApps] = useState<App[]>([
     {
       id: 1,
@@ -135,49 +139,85 @@ const Apps: FC = () => {
   }
 
   return (
-    <div className={css.page}>
-      <div className={css.header}>
-        <div className={css.control}>
-          全部应用
-          <svg className={css.controlIcon} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <path d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z"></path>
-          </svg>
-        </div>
-      </div>
-      <ReactSortable
-        className={css.groups}
-        ghostClass={css.ghost}
-        group="groups"
-        list={apps}
-        setList={setApps}
-        animation={dragAnimation}
+    <SwitchTransition>
+      <CSSTransition
+        nodeRef={pageRef}
+        key={`${showAll}`}
+        addEndListener={(done: () => void) => {
+          pageRef.current?.addEventListener('transitionend', done, false)
+        }}
+        classNames={showAll ? {
+          enter: css.pageShowAllEnter,
+          enterActive: css.pageShowAllEnterActive,
+          exit: css.pageShowAllExit,
+          exitActive: css.pageShowAllExitActive,
+        } : {
+          enter: css.pageShowAllBackEnter,
+          enterActive: css.pageShowAllEnterActive,
+          exit: css.pageShowAllExit,
+          exitActive: css.pageShowAllBackExitActive,
+        }}
       >
-        {apps.map((item, index) => (
-          <div className={css.group} key={item.id}>
-            <div className={css.groupName}>{item.name}</div>
-            <ReactSortable
-              className={css.apps}
-              ghostClass={css.ghost}
-              group="apps"
-              list={item.apps}
-              setList={(apps) => setSubApps(index, apps)}
-              animation={dragAnimation}
-            >
-              {item.apps?.map((item) => (
-                <div className={css.app} key={item.id}>
-                  {item?.icon ? (
-                    <img className={css.appLogo} src={item.icon} />
-                  ) : (
-                    <div className={`${css.appLogo} ${css.appLogoText}`}>{item.name.slice(0, 1)}</div>
-                  )}
-                  <div className={css.appName}>{item.name}</div>
+        <div ref={pageRef} className={css.page}>
+          {showAll ? (
+            <>
+              <div className={css.header}>
+                <div className={css.control} onClick={() => setShowAll((value) => !value)}>
+                  <svg className={css.controlIcon} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M641.28 278.613333l-45.226667-45.226666-278.634666 278.762666 278.613333 278.485334 45.248-45.269334-233.365333-233.237333z"></path>
+                  </svg>
+                  返回
                 </div>
-              ))}
-            </ReactSortable>
-          </div>
-        ))}
-      </ReactSortable>
-    </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={css.header}>
+                <div className={css.control} onClick={() => setShowAll((value) => !value)}>
+                  全部应用
+                  <svg className={css.controlIcon} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z"></path>
+                  </svg>
+                </div>
+              </div>
+              <ReactSortable
+                className={css.groups}
+                ghostClass={css.ghost}
+                group="groups"
+                list={apps}
+                setList={setApps}
+                animation={dragAnimation}
+              >
+                {apps.map((item, index) => (
+                  <div className={css.group} key={item.id}>
+                    <div className={css.groupName}>{item.name}</div>
+                    <ReactSortable
+                      className={css.apps}
+                      ghostClass={css.ghost}
+                      group="apps"
+                      list={item.apps}
+                      setList={(apps) => setSubApps(index, apps)}
+                      animation={dragAnimation}
+                    >
+                      {item.apps?.map((item) => (
+                        <div className={css.app} key={item.id}>
+                          {item?.icon ? (
+                            <img className={css.appLogo} src={item.icon} />
+                          ) : (
+                            <div className={`${css.appLogo} ${css.appLogoText}`}>{item.name.slice(0, 1)}</div>
+                          )}
+                          <div className={css.appName}>{item.name}</div>
+                        </div>
+                      ))}
+                    </ReactSortable>
+                  </div>
+                ))}
+              </ReactSortable>
+            </>
+          )}
+        </div>
+      </CSSTransition>
+    </SwitchTransition>
   )
 }
 
