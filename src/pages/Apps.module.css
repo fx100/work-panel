@@ -22,13 +22,12 @@
 }
 
 .header {
-  @apply flex justify-end items-center;
+  @apply z-1 sticky top-8 ml-auto w-max flex justify-end items-center;
 }
 .header > .control {
   @apply text-xs px-[7px] py-[3px] border rounded flex gap-2 transition-colors;
-  @apply border-black border-opacity-10 bg-black bg-opacity-5;
-  @apply dark:(border-white border-opacity-10 bg-white bg-opacity-5);
-  @apply hover:bg-opacity-10 active:bg-opacity-5;
+  @apply border-true-gray-200 bg-true-gray-50 dark:(border-dark-50 bg-dark-200);
+  @apply hover:(bg-true-gray-100 dark:bg-dark-100) active:(bg-true-gray-200 dark:bg-dark-500);
 }
 .header > .control > .controlIcon {
   @apply w-4 h-4 fill-current;
